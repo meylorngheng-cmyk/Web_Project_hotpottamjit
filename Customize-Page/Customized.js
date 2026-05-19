@@ -1,15 +1,13 @@
 // Product Database
-/* ===== PROTECT PAGE ===== */
-const savedUser = JSON.parse(localStorage.getItem("userAccount"));
+// ===== PROTECT PAGE FIX =====
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 const loggedIn = localStorage.getItem("isLoggedIn");
 
-if (
-  loggedIn !== "true" ||
-  !savedUser ||
-  !savedUser.telephone ||
-  !savedUser.password
-) {
-  localStorage.removeItem("isLoggedIn");
+if (loggedIn !== "true" || !currentUser || !currentUser.telephone) {
+  localStorage.setItem(
+    "redirectAfterLogin",
+    window.location.href
+  ); // optional: redirect back after login
   localStorage.setItem(
     "needLoginMessage",
     "🔒 Please login or signup first to access this page."
