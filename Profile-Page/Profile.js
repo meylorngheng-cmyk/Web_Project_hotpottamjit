@@ -243,8 +243,19 @@ function showProfileEditBox() {
 
 // ======== LOGOUT ========
 const logoutBtn = document.getElementById("logoutBtn");
-if(logoutBtn) logoutBtn.addEventListener("click",()=>{ localStorage.removeItem("isLoggedIn"); window.location.href="login.html"; });
 
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    // Clear all session info
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("profileName");
+    localStorage.removeItem("profileTelephone");
+    
+    // Redirect to login page
+    window.location.href = "login.html";
+  });
+}
 // ======== INITIALIZE ========
 renderFavorites();
 renderHistory();

@@ -4,14 +4,8 @@ const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 const loggedIn = localStorage.getItem("isLoggedIn");
 
 if (!loggedIn || loggedIn !== "true" || !currentUser || !currentUser.telephone) {
-  localStorage.setItem(
-    "redirectAfterLogin",
-    window.location.href
-  ); // Optional: redirect back after login
-  localStorage.setItem(
-    "needLoginMessage",
-    "🔒 Please login or signup first to access this page."
-  );
+  localStorage.setItem("redirectAfterLogin", window.location.href);
+  localStorage.setItem("needLoginMessage", "🔒 Please login or signup first.");
   window.location.replace("../Profile-Page/login.html");
 }
 

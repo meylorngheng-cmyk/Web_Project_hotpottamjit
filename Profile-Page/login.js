@@ -135,11 +135,11 @@ function signupUser(name, telephone, password, confirmPassword) {
   }
   const newUser = { name, telephone, password };
   accounts.push(newUser);
-  localStorage.setItem("userAccounts", JSON.stringify(accounts));
-  localStorage.setItem("isLoggedIn", "true");
-  localStorage.setItem("currentUser", JSON.stringify(newUser));
-  localStorage.setItem("profileName", name);
-  localStorage.setItem("profileTelephone", telephone);
+localStorage.setItem("userAccounts", JSON.stringify(accounts)); // all users
+localStorage.setItem("isLoggedIn", "true");                     // session active
+localStorage.setItem("currentUser", JSON.stringify(newUser));   // current user object
+localStorage.setItem("profileName", newUser.name);              // optional
+localStorage.setItem("profileTelephone", newUser.telephone);    // optional
   showMessage("Signup successful! Redirecting...", "success");
   setTimeout(() => { goAfterLogin(); }, 800);
 }
@@ -151,13 +151,17 @@ function loginUser(telephone, password) {
     showMessage("Phone number or password is incorrect.", "error");
     return;
   }
+
+  // Corrected here
   localStorage.setItem("isLoggedIn", "true");
   localStorage.setItem("currentUser", JSON.stringify(found));
   localStorage.setItem("profileName", found.name);
   localStorage.setItem("profileTelephone", found.telephone);
+
   showMessage("Login successful! Redirecting...", "success");
   setTimeout(() => { goAfterLogin(); }, 800);
 }
+
 function goAfterLogin() {
   const redirectPage = localStorage.getItem("redirectAfterLogin");
 
