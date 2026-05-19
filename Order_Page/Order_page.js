@@ -158,27 +158,27 @@ function toggleFavorite(comboName, button) {
   const combo = combos.find(c => c.name === comboName);
   if (!combo) return;
 
-  let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  const favoritesKey = `favorites_${getCurrentUserTelephone()}`;
+  let favorites = JSON.parse(localStorage.getItem(favoritesKey)) || [];
 
   const index = favorites.findIndex(f => f.name === combo.name);
 
   if (index === -1) {
-    const mappedCombo = {
+    favorites.push({
       id: combo.id || Date.now(),
       name: combo.name,
       description: combo.desc || "",
       image: combo.image,
       price: combo.price,
       hasDrink: false
-    };
-    favorites.push(mappedCombo);
+    });
     button.innerHTML = "❤️";
   } else {
     favorites.splice(index, 1);
     button.innerHTML = "🤍";
   }
 
-  localStorage.setItem("favorites", JSON.stringify(favorites));
+  localStorage.setItem(favoritesKey, JSON.stringify(favorites));
 }
 
 combos.forEach(combo => {
